@@ -1,0 +1,530 @@
+{
+  "info": {
+    "_postman_id": "4649cef5-cbbc-448a-bd62-3dab31321be6",
+    "name": "API Bibliotca",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "2292538",
+    "_collection_link": "https://go.postman.co/collection/2292538-4649cef5-cbbc-448a-bd62-3dab31321be6?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Libros",
+      "item": [
+        {
+          "name": "Get Libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Libro Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/3",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Libro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nombreLibro\": \"Se fue la luz\",\r\n    \"idAutor\":9\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Libro Id",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{   \r\n    \"nombreLibro\": \"Probando funcionalidad tes 4\",\r\n    \"idAutor\": 3\r\n}\r\n\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/5",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Libro Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/6",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Autores",
+      "item": [
+        {
+          "name": "Get Autores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Autor Id",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\"op\": \"replace\", \"path\": \"/NombreAutor\", \"value\": \"Camelia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoPaterno\", \"value\": \"Marintia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoMaterno\", \"value\": \"Celeste\"}\r\n]"
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/12",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "12"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Autor Alpha",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\"op\": \"replace\", \"path\": \"/NombreAutor\", \"value\": \"Camelia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoPaterno\", \"value\": \"Marintia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoMaterno\", \"value\": \"Celeste\"}\r\n]"
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/Moon",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "Moon"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Autor By Nombre",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\"op\": \"replace\", \"path\": \"/NombreAutor\", \"value\": \"Camelia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoPaterno\", \"value\": \"Marintia\"},\r\n    {\"op\": \"replace\", \"path\": \"/ApellidoMaterno\", \"value\": \"Celeste\"}\r\n]"
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/3",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Autor",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{  \r\n    \"nombreAutor\": \"Erik\",\r\n    \"apellidos\": \"Rodriguez\",\r\n    \"Identificacion\": \"1235asd49\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch Autor",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\"op\": \"replace\", \"path\": \"/nombreAutor\", \"value\": \"Felipe\"},\r\n    {\"op\": \"replace\", \"path\": \"/Identificacion\", \"value\": \"45784asdfAS\"}\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/12",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "12"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Autor",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"idAutor\": 7,\r\n    \"nombreAutor\": \"Actualizado\"\r\n\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/7",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "7"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Autor Id",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores/15",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores",
+                "15"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comentarios",
+      "item": [
+        {
+          "name": "Get Comentarios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/7/comentarios",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "7",
+                "comentarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Comnetario Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/7/comentarios/fe1774f9-b943-4123-c304-08df147e0cb5",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "7",
+                "comentarios",
+                "fe1774f9-b943-4123-c304-08df147e0cb5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Comentario",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"Cuerpo\": \"Libro de Simón - Nueva entrada de comentario\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/7/comentarios",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "7",
+                "comentarios"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Patch Comentario",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {\r\n        \"op\":\"replace\",\r\n        \"path\": \"Cuerpo\",\r\n        \"value\": \"Este es un buen libro - Actualizado\"\r\n\r\n    }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/libros/7/comentarios/fe1774f9-b943-4123-c304-08df147e0cb5",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "libros",
+                "7",
+                "comentarios",
+                "fe1774f9-b943-4123-c304-08df147e0cb5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comentario",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5293/api/v1/libros/9/comentarios/b5fc6236-eb5b-4698-278c-08ddfff18dbb",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5293",
+              "path": [
+                "api",
+                "v1",
+                "libros",
+                "9",
+                "comentarios",
+                "b5fc6236-eb5b-4698-278c-08ddfff18dbb"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AutoresColeccion",
+      "item": [
+        {
+          "name": "Post Autores",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "[\r\n    {  \r\n        \"NombreAutor\": \"Bambu\",\r\n        \"ApellidoPaterno\": \"Negro\",\r\n        \"ApellidoMaterno\": \"Dog\",\r\n        \"Identificacion\": \"12345678919\",\r\n        \"libros\":[\r\n            {\"TituloLibro\": \"Libro 1 - Bambu\"},\r\n            {\"TituloLibro\": \"Libro 2 - Bambu\"},\r\n            {\"TituloLibro\": \"Libro 2 - Bambu\"}\r\n        ]\r\n    },\r\n    {\r\n        \"NombreAutor\": \"Ronni\",\r\n        \"ApellidoPaterno\": \"Sin\",\r\n        \"ApellidoMaterno\": \"Nombre\",\r\n        \"Identificacion\": \"12345678919\",\r\n    },\r\n    {  \r\n        \"NombreAutor\": \"Senobio\",\r\n        \"ApellidoPaterno\": \"Paes\",\r\n        \"ApellidoMaterno\": \"Pig\",\r\n        \"Identificacion\": \"12345678919\",\r\n        \"libros\":[\r\n            {\"TituloLibro\": \"Libro 1 - Senobio\"},\r\n            {\"TituloLibro\": \"Libro 2 - Senobio\"}          \r\n        ]\r\n    }\r\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores-coleccion",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores-coleccion"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Autores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{uriBiblioteca}}/autores-coleccion/18,19,20",
+              "host": [
+                "{{uriBiblioteca}}"
+              ],
+              "path": [
+                "autores-coleccion",
+                "18,19,20"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "uriBiblioteca",
+      "value": "http://localhost:5246/api"
+    }
+  ]
+}
