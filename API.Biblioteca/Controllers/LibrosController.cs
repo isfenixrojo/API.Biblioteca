@@ -1,0 +1,113 @@
+﻿using API.Biblioteca.Datos;
+using API.Biblioteca.DTOs;
+using API.Biblioteca.Entidades;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace API.Biblioteca.Controllers
+{
+    [ApiController]
+    [Route("api/libros")]
+    public class LibrosController : ControllerBase
+    {
+        #region Dependencias 
+        private readonly ApplicationDbContext _context;
+        private readonly IMapper _mapper;
+
+        public LibrosController(ApplicationDbContext context, IMapper mapper)
+        {
+            _context = context;
+            _mapper = mapper;
+        }
+        #endregion Dependencias
+
+        [HttpGet]
+        public async Task<ActionResult> GetLibros()
+        {
+            var libros = await _context.Libros.ToListAsync();
+
+            if (libros.Count == 0)
+            {
+                return NotFound("Sin datos.");
+            }
+            var libroDTO = _mapper.Map<IEnumerable<LibroDTO>>(libros);
+            return Ok(libroDTO);
+        }
+
+        [HttpGet("{idLibros:int}", Name = "GetLibroById")]
+        public async Task<ActionResult> GetLibroById(int idLibros)
+        {
+            var libros = await _context.Libros
+                .Include(x => x.Autores)
+                .FirstOrDefaultAsync(x => x.IdLibro == idLibros);
+            if (libros == null)
+            {
+                return NotFound("Sin datos.");
+            }
+            var autorDTO = _mapper.Map<LibroAutorDTO>(libros);
+            return Ok(autorDTO);
+        }
+
+        /*
+        [HttpPost]
+        public async Task<ActionResult> PostLibro(CreateLibroDTO createLibroDTO)
+        {
+            var libro = _mapper.Map<Libro>(createLibroDTO);
+            var existeAutor = await _context.Autores.AnyAsync(x => x.IdAutor == libro.IdAutor);
+            if (!existeAutor)
+            {
+                ModelState.AddModelError(nameof(libro.IdAutor), $"El autor de id {libro.IdAutor} no existe.");
+                return ValidationProblem();
+                //return BadRequest();
+            }
+            
+            _context.Add(libro);
+            await _context.SaveChangesAsync();
+
+            var libroDTO = _mapper.Map<LibroDTO>(libro);
+            return CreatedAtRoute("GetLibroById", new { idLibros = libro.IdLibro }, libroDTO);
+        }
+
+        [HttpPut("{idLibros:int}")]
+        public async Task<ActionResult> PutLibro(int idLibros, CreateLibroDTO createLibroDTO)
+        {
+            var libro = _mapper.Map<Libro>(createLibroDTO);
+
+            /*if (idLibros != libro.IdLibro)
+            {
+                return BadRequest("Los IDs deben coincidir.");
+            }*/
+        /*
+            libro.IdLibro = idLibros;   
+            var existeAutor = await _context.Autores.AnyAsync(x => x.IdAutor == libro.IdAutor);
+            if (!existeAutor)
+            {
+                return BadRequest($"El autor de id {libro.IdAutor} no existe.");
+            }
+
+            var existeLibro = await _context.Libros.AnyAsync(x => x.IdLibro == idLibros);
+            if (!existeLibro)
+            {
+                return BadRequest($"El libro con id {libro.IdLibro} no existe.");
+            }
+
+            _context.Update(libro);
+            await _context.SaveChangesAsync();
+            return Ok("Success");
+        }*/
+
+        [HttpDelete("{idLibro:int}")]
+        public async Task<ActionResult> DelteLibro(int idLibro)
+        {
+            var registroBorrado = await _context.Libros.Where(x => x.IdLibro == idLibro).ExecuteDeleteAsync();
+            if (registroBorrado == 0)
+            {
+                return NotFound();
+            }
+            return Ok("Success");
+
+        }
+
+    }
+}
