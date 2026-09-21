@@ -20,8 +20,8 @@ namespace API.Biblioteca.Utilidades
             CreateMap<Autor, AutorPatchDTO>().ReverseMap();
 
             CreateMap<Libro, LibroDTO>();
-
-            CreateMap<CreateLibroDTO, Libro>();
+            CreateMap<CreateLibroDTO, Libro>().ForMember(ent => ent.Autores, config =>
+            config.MapFrom(dto => dto.AutoresIds.Select(id => new AutorLibro { IdAutor = id })));
 
             /*CreateMap<Libro, LibroAutorDTO>()
                 .ForMember(dto => dto.NombreAutor, config =>
@@ -29,7 +29,7 @@ namespace API.Biblioteca.Utilidades
 
             CreateMap<ComentarioCreacionDTO, Comentario>();
             CreateMap<Comentario, ComentarioDTO>();
-            CreateMap<ComentarioPatchDTO, Comentario>().ReverseMap();   
+            CreateMap<ComentarioPatchDTO, Comentario>().ReverseMap();
         }
 
         private string MapearNombreApellidos(Autor autor) => $"{autor!.NombreAutor} {autor.Apellidos}";

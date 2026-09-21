@@ -49,19 +49,36 @@ namespace API.Biblioteca.Controllers
             return Ok(autorDTO);
         }
 
-        /*
+
         [HttpPost]
         public async Task<ActionResult> PostLibro(CreateLibroDTO createLibroDTO)
         {
-            var libro = _mapper.Map<Libro>(createLibroDTO);
-            var existeAutor = await _context.Autores.AnyAsync(x => x.IdAutor == libro.IdAutor);
-            if (!existeAutor)
+            if (createLibroDTO.AutoresIds is null || createLibroDTO.AutoresIds.Count == 0)
             {
-                ModelState.AddModelError(nameof(libro.IdAutor), $"El autor de id {libro.IdAutor} no existe.");
+                ModelState.AddModelError(nameof(createLibroDTO.AutoresIds),
+                    "No se puede crear un libro sin autores");
                 return ValidationProblem();
-                //return BadRequest();
             }
-            
+
+            var autoresIdsExisten = await _context.Autores
+                                    .Where(x => createLibroDTO.AutoresIds.Contains(x.IdAutor))
+                                    .Select(x => x.IdAutor).ToListAsync();
+
+
+            if (autoresIdsExisten.Count != createLibroDTO.AutoresIds.Count)
+            {
+                var autoresNoExisten = createLibroDTO.AutoresIds.Except(autoresIdsExisten);
+                var autoresNoExistenString = string.Join(", ", autoresNoExisten);
+                var mensajeDeError = $"Los siguentes autores no existen: {autoresNoExistenString}";
+                ModelState.AddModelError(nameof(createLibroDTO.AutoresIds), mensajeDeError);
+
+                return ValidationProblem();
+            }
+
+            var libro = _mapper.Map<Libro>(createLibroDTO);
+
+            AsignarOrdenAutores(libro);
+
             _context.Add(libro);
             await _context.SaveChangesAsync();
 
@@ -69,6 +86,18 @@ namespace API.Biblioteca.Controllers
             return CreatedAtRoute("GetLibroById", new { idLibros = libro.IdLibro }, libroDTO);
         }
 
+        private void AsignarOrdenAutores(Libro libro)
+        {
+            if (libro.Autores is not null)
+            {
+                for (int i = 0; i < libro.Autores.Count; i++)
+                {
+                    libro.Autores[i].Orden = i;
+                }
+            }
+        }
+
+        /*
         [HttpPut("{idLibros:int}")]
         public async Task<ActionResult> PutLibro(int idLibros, CreateLibroDTO createLibroDTO)
         {
