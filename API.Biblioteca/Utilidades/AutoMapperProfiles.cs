@@ -18,14 +18,22 @@ namespace API.Biblioteca.Utilidades
 
             CreateMap<CreateAutorDTO, Autor>();
             CreateMap<Autor, AutorPatchDTO>().ReverseMap();
+            CreateMap<AutorLibro, LibroDTO>()
+                .ForMember(dto => dto.IdLibro, config => config.MapFrom(ent=> ent.IdLibro))
+                .ForMember(dto => dto.NombreLibro, config => config.MapFrom(ent => ent.Libro!.NombreLibro));
+
+            CreateMap<Libro, LibroAutorDTO>();
+
+            CreateMap<AutorLibro, AutorDTO>()
+                .ForMember(dto => dto.IdAutor, config => config.MapFrom(ent => ent.IdAutor))
+                .ForMember(dto => dto.NombreCompletoAutor,
+                config => config.MapFrom(ent => MapearNombreApellidos(ent.Autor!)));
 
             CreateMap<Libro, LibroDTO>();
             CreateMap<CreateLibroDTO, Libro>().ForMember(ent => ent.Autores, config =>
             config.MapFrom(dto => dto.AutoresIds.Select(id => new AutorLibro { IdAutor = id })));
 
-            /*CreateMap<Libro, LibroAutorDTO>()
-                .ForMember(dto => dto.NombreAutor, config =>
-                                config.MapFrom(ent => MapearNombreApellidos(ent.Autor!)));*/
+            
 
             CreateMap<ComentarioCreacionDTO, Comentario>();
             CreateMap<Comentario, ComentarioDTO>();

@@ -26,18 +26,8 @@ namespace API.Biblioteca.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<AutorDTO>> GetAutores()
-
         {
             var autores = await _context.Autores.ToListAsync();
-
-            /*var autorerDTO = autores.Select(autor =>
-                                            new AutorDTO
-                                            {
-                                                IdAutor = autor.IdAutor,
-                                                NombreCompletoAutor = $"{autor.NombreAutor} {autor.Apellidos}"
-
-                                            });*/
-
             var autorerDTO = _mapper.Map<IEnumerable<AutorDTO>>(autores);
             return autorerDTO;
         }
@@ -47,6 +37,7 @@ namespace API.Biblioteca.Controllers
         {
             var autor = await _context.Autores
                 .Include(x => x.Libros)
+                .ThenInclude(x=> x.Libro)
                 .FirstOrDefaultAsync(x => x.IdAutor == idAutor);
             if (autor == null)
             {

@@ -2,7 +2,7 @@
 {
     public class LibroAutorDTO : LibroDTO
     {
-        public int IdAutor { get; set; }
-        public required string NombreAutor { get; set; }
+        public List<AutorDTO> Autores { get; set; } = [];
+        
     }
 }
