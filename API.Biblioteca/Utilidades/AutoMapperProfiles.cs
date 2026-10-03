@@ -29,6 +29,10 @@ namespace API.Biblioteca.Utilidades
                 .ForMember(dto => dto.NombreCompletoAutor,
                 config => config.MapFrom(ent => MapearNombreApellidos(ent.Autor!)));
 
+            CreateMap<CreateLibroDTO, AutorLibro>()
+                .ForMember(ent => ent.Libro,
+                config => config.MapFrom(dto => new Libro {NombreLibro = dto.NombreLibro }));
+
             CreateMap<Libro, LibroDTO>();
             CreateMap<CreateLibroDTO, Libro>().ForMember(ent => ent.Autores, config =>
             config.MapFrom(dto => dto.AutoresIds.Select(id => new AutorLibro { IdAutor = id })));
